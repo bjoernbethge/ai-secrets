@@ -1,5 +1,11 @@
 # ai-secrets
 
+[![PyPI version](https://img.shields.io/pypi/v/ai-secrets.svg)](https://pypi.org/project/ai-secrets/)
+[![Python versions](https://img.shields.io/pypi/pyversions/ai-secrets.svg)](https://pypi.org/project/ai-secrets/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Tests](https://img.shields.io/github/actions/workflow/status/bjoernbethge/ai-secrets/test.yml?label=tests)](https://github.com/bjoernbethge/ai-secrets/actions)
+[![Downloads](https://img.shields.io/pypi/dm/ai-secrets.svg)](https://pypi.org/project/ai-secrets/)
+
 AI-friendly secrets management CLI using OS-native encryption.
 
 **Supported Backends:**  
@@ -24,7 +30,7 @@ pip install ai-secrets
 uv add ai-secrets
 
 # Development install
-git clone https://github.com/BjornBethge/ai-secrets.git
+git clone https://github.com/bjoernbethge/ai-secrets.git
 cd ai-secrets
 uv sync
 ```

@@ -1,6 +1,6 @@
 [project]
 name = "ai-secrets"
-version = "0.1.2"
+version = "0.1.3"
 description = "AI-friendly secrets management CLI using OS-native keyring encryption"
 readme = "README.md"
 license = {text = "MIT"}
@@ -33,16 +33,11 @@ dependencies = [
     "rich>=13.0.0",
 ]
 
-[project.optional-dependencies]
-examples = [
-    "pydantic-ai-slim[openai,cli,mcp]>=0.0.14",
-]
-
 [project.urls]
-Homepage = "https://github.com/BjornBethge/ai-secrets"
-Repository = "https://github.com/BjornBethge/ai-secrets"
-Issues = "https://github.com/BjornBethge/ai-secrets/issues"
-Documentation = "https://github.com/BjornBethge/ai-secrets#readme"
+Homepage = "https://github.com/bjoernbethge/ai-secrets"
+Repository = "https://github.com/bjoernbethge/ai-secrets"
+Issues = "https://github.com/bjoernbethge/ai-secrets/issues"
+Documentation = "https://github.com/bjoernbethge/ai-secrets#readme"
 
 [project.scripts]
 ai-secrets = "ai_secrets.__main__:app"
