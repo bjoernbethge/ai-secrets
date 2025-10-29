@@ -33,6 +33,11 @@ dependencies = [
     "rich>=13.0.0",
 ]
 
+[project.optional-dependencies]
+examples = [
+    "pydantic-ai-slim[openai,cli,mcp]>=0.0.14",
+]
+
 [project.urls]
 Homepage = "https://github.com/BjornBethge/ai-secrets"
 Repository = "https://github.com/BjornBethge/ai-secrets"

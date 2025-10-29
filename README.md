@@ -196,13 +196,29 @@ See the `examples/` directory for practical use cases:
 
 AI agent with secure secret management and tool approval workflow. See [`examples/pydantic_ai_example.py`](examples/pydantic_ai_example.py).
 
-**Install and run:**
+**Try it out:**
 ```bash
-# Install with Pydantic AI dependencies
+# Clone the repo to get examples
+git clone https://github.com/bjoernbethge/ai-secrets.git
+cd ai-secrets
+
+# Install with example dependencies
 uv sync --group examples
 
 # Run the example
 uv run python examples/pydantic_ai_example.py
+```
+
+**Or download just the example:**
+```bash
+# Install dependencies
+pip install ai-secrets "pydantic-ai-slim[openai,cli,mcp]"
+
+# Get the example file
+curl -O https://raw.githubusercontent.com/bjoernbethge/ai-secrets/master/examples/pydantic_ai_example.py
+
+# Run it
+python pydantic_ai_example.py
 ```
 
 **Features demonstrated:**
