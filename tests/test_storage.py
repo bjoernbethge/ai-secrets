@@ -43,7 +43,7 @@ def mock_keyring():
 def test_init_default():
     """Test initialization with default parameters."""
     store = SecretsStore()
-    assert store.service_name == "ai-keys"
+    assert store.service_name == "ai-secrets"
     assert store.base_dir == Path.home() / ".secrets"
     assert store.metadata_file == store.base_dir / "metadata.json"
 

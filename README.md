@@ -87,7 +87,7 @@ ai-secrets delete API_KEY --yes -f json
 ### `status` — Show manager status
 ```bash
 ai-secrets status -f json
-# {"success": true, "service_name": "ai-keys", "secret_count": 3, ...}
+# {"success": true, "service_name": "ai-secrets", "secret_count": 3, ...}
 ```
 
 ### `export` — Export as environment variables
@@ -203,8 +203,36 @@ uv pip install -e .
 
 ## Notes
 
-- Default service name: `ai-keys`
+- Default service name: `ai-secrets` (before v0.1.0: `ai-keys`)
 - Metadata stored in: `~/.secrets/metadata.json` (only names, not values)
 - Secret values stored in: OS keyring (encrypted)
 - `export -f bash` prints warning to stderr
 - Linux/KeePassXC: May prompt for database unlock
+
+### Migrating from old default service name
+
+If you used the old default `ai-keys`:
+
+```bash
+# Option 1: Continue using old service name explicitly
+ai-secrets --service-name ai-keys list
+
+# Option 2: Copy secrets to new default (one-time migration)
+# Export from old
+ai-secrets --service-name ai-keys export -f json > secrets.json
+
+# Import to new (manual for each secret)
+ai-secrets set SECRET_NAME "value"
+```
+
+**Python API migration:**
+```python
+# Old secrets still accessible
+old_store = SecretsStore(service_name="ai-keys")
+secrets = old_store.export_env()
+
+# Migrate to new default
+new_store = SecretsStore()  # uses "ai-secrets" now
+for name, value in secrets.items():
+    new_store.set(name, value)
+```

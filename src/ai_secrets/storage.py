@@ -25,7 +25,7 @@ class SecretsStore:
     """
 
     def __init__(
-        self, service_name: str = "ai-keys", base_dir: Optional[Path] = None
+        self, service_name: str = "ai-secrets", base_dir: Optional[Path] = None
     ) -> None:
         if not service_name or not service_name.strip():
             raise ValueError("service_name cannot be empty")
