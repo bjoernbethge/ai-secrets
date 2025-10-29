@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 from typer.testing import CliRunner
 
-from secrets_cli.cli import app
+from ai_secrets.cli import app
 
 runner = CliRunner()
 
@@ -20,7 +20,7 @@ def test_help():
 
 def test_set_command():
     """Test set command."""
-    with patch("secrets_cli.storage.keyring") as mock_keyring:
+    with patch("ai_secrets.storage.keyring") as mock_keyring:
         result = runner.invoke(
             app,
             ["--service-name", "test", "--base-dir", ".test-secrets", "set", "TEST_KEY", "test_value"],
@@ -32,7 +32,7 @@ def test_set_command():
 
 def test_set_command_json():
     """Test set command with JSON output."""
-    with patch("secrets_cli.storage.keyring") as mock_keyring:
+    with patch("ai_secrets.storage.keyring") as mock_keyring:
         result = runner.invoke(
             app,
             ["--service-name", "test", "--base-dir", ".test-secrets", "set", "TEST_KEY", "test_value", "-f", "json"],
@@ -45,7 +45,7 @@ def test_set_command_json():
 
 def test_get_command():
     """Test get command."""
-    with patch("secrets_cli.storage.keyring") as mock_keyring:
+    with patch("ai_secrets.storage.keyring") as mock_keyring:
         mock_keyring.get_password.return_value = "test_value"
         
         result = runner.invoke(
@@ -58,7 +58,7 @@ def test_get_command():
 
 def test_get_command_print():
     """Test get command with --print flag."""
-    with patch("secrets_cli.storage.keyring") as mock_keyring:
+    with patch("ai_secrets.storage.keyring") as mock_keyring:
         mock_keyring.get_password.return_value = "test_value"
         
         result = runner.invoke(
@@ -71,7 +71,7 @@ def test_get_command_print():
 
 def test_get_nonexistent():
     """Test get command for non-existent secret."""
-    with patch("secrets_cli.storage.keyring") as mock_keyring:
+    with patch("ai_secrets.storage.keyring") as mock_keyring:
         mock_keyring.get_password.return_value = None
         
         result = runner.invoke(
@@ -84,7 +84,7 @@ def test_get_nonexistent():
 
 def test_list_command_empty(tmp_path: Path):
     """Test list command with no secrets."""
-    with patch("secrets_cli.storage.keyring"):
+    with patch("ai_secrets.storage.keyring"):
         result = runner.invoke(
             app,
             ["--service-name", "test", "--base-dir", str(tmp_path), "list"],
@@ -95,7 +95,7 @@ def test_list_command_empty(tmp_path: Path):
 
 def test_list_command_json(tmp_path: Path):
     """Test list command with JSON output."""
-    with patch("secrets_cli.storage.keyring"):
+    with patch("ai_secrets.storage.keyring"):
         result = runner.invoke(
             app,
             ["--service-name", "test", "--base-dir", str(tmp_path), "list", "-f", "json"],
@@ -110,7 +110,7 @@ def test_list_command_json(tmp_path: Path):
 
 def test_delete_command():
     """Test delete command with confirmation."""
-    with patch("secrets_cli.storage.keyring") as mock_keyring:
+    with patch("ai_secrets.storage.keyring") as mock_keyring:
         mock_keyring.get_password.return_value = "test_value"
         
         result = runner.invoke(
@@ -124,7 +124,7 @@ def test_delete_command():
 
 def test_delete_nonexistent():
     """Test delete command for non-existent secret."""
-    with patch("secrets_cli.storage.keyring") as mock_keyring:
+    with patch("ai_secrets.storage.keyring") as mock_keyring:
         mock_keyring.get_password.return_value = None
         
         result = runner.invoke(
@@ -137,7 +137,7 @@ def test_delete_nonexistent():
 
 def test_export_bash(tmp_path: Path):
     """Test export command with bash format."""
-    with patch("secrets_cli.storage.keyring") as mock_keyring:
+    with patch("ai_secrets.storage.keyring") as mock_keyring:
         def mock_get_password(service: str, name: str):
             return {"KEY1": "value1", "KEY2": "value2"}.get(name)
         
@@ -159,7 +159,7 @@ def test_export_bash(tmp_path: Path):
 
 def test_export_json(tmp_path: Path):
     """Test export command with JSON format."""
-    with patch("secrets_cli.storage.keyring") as mock_keyring:
+    with patch("ai_secrets.storage.keyring") as mock_keyring:
         def mock_get_password(service: str, name: str):
             return {"KEY1": "value1", "KEY2": "value2"}.get(name)
         
@@ -183,7 +183,7 @@ def test_export_json(tmp_path: Path):
 
 def test_status_json(tmp_path: Path):
     """Test status command with JSON output."""
-    with patch("secrets_cli.storage.keyring"):
+    with patch("ai_secrets.storage.keyring"):
         result = runner.invoke(
             app,
             ["--service-name", "test", "--base-dir", str(tmp_path), "status", "-f", "json"],
@@ -198,7 +198,7 @@ def test_status_json(tmp_path: Path):
 
 def test_status_table(tmp_path: Path):
     """Test status command with table output."""
-    with patch("secrets_cli.storage.keyring"):
+    with patch("ai_secrets.storage.keyring"):
         result = runner.invoke(
             app,
             ["--service-name", "test", "--base-dir", str(tmp_path), "status", "-f", "table"],

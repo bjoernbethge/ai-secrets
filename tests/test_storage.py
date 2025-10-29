@@ -7,7 +7,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from secrets_cli.storage import SecretsStore
+from ai_secrets.storage import SecretsStore
 
 
 @pytest.fixture
@@ -19,7 +19,7 @@ def temp_store(tmp_path: Path) -> SecretsStore:
 @pytest.fixture
 def mock_keyring():
     """Mock the keyring module."""
-    with patch("secrets_cli.storage.keyring") as mock:
+    with patch("ai_secrets.storage.keyring") as mock:
         storage = {}
         
         def set_password(service: str, name: str, value: str) -> None:

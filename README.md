@@ -146,16 +146,47 @@ ai-secrets --service-name myapp --base-dir .secrets set API_KEY "key"
 
 **Python API:**
 ```python
-from secrets_cli.storage import SecretsStore
+from ai_secrets.storage import SecretsStore
 from pathlib import Path
 
 # Per-environment stores
 prod_store = SecretsStore(service_name="myapp-prod")
 dev_store = SecretsStore(service_name="myapp-dev", base_dir=Path(".secrets"))
 
+# Set and get secrets
 prod_store.set("API_KEY", "sk-prod-xxx")
-print(prod_store.get("API_KEY"))
+print(prod_store.get("API_KEY"))  # "sk-prod-xxx"
+
+# List all secret names
+secrets = prod_store.list_names()  # ["API_KEY", ...]
+
+# Export as dict
+env_vars = prod_store.export_env()  # {"API_KEY": "sk-prod-xxx", ...}
+
+# Delete a secret
+prod_store.delete("API_KEY")
 ```
+
+**Direct keyring usage:**
+```python
+import keyring
+
+# Store secret (basic keyring API)
+keyring.set_password("myapp", "API_KEY", "secret-value")
+
+# Get secret
+value = keyring.get_password("myapp", "API_KEY")
+
+# Delete secret
+keyring.delete_password("myapp", "API_KEY")
+```
+
+> **Why use ai-secrets instead of raw keyring?**
+> - ✅ Secret name management (list all secrets)
+> - ✅ Metadata tracking (knows what secrets exist)
+> - ✅ Multi-environment support (`--service-name`)
+> - ✅ JSON export for AI workflows
+> - ✅ CLI convenience
 
 ## Development
 
