@@ -13,7 +13,7 @@ from rich.table import Table
 from .storage import SecretsStore
 
 app = typer.Typer(help="AI-friendly Secrets Management CLI")
-console = Console()
+console = Console(force_terminal=True, legacy_windows=False)
 
 
 class OutputFormat(str, Enum):

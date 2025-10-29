@@ -32,8 +32,12 @@ jobs:
 
             - name: Run tests
               run: uv run pytest tests/ -v --tb=short
+              env:
+                  PYTHONIOENCODING: utf-8
 
             - name: Test CLI commands
+              env:
+                  PYTHONIOENCODING: utf-8
               run: |
                   uv run python -m ai_secrets --help
                   uv run python -m ai_secrets --service-name ci-test set TEST_KEY "test_value"
