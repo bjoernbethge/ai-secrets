@@ -44,14 +44,11 @@ htmlcov/
 .secrets/
 .test-secrets/
 .demo/
-*.db
-mlruns/
-mlflow_tracking/
 
 # OS
 .DS_Store
 Thumbs.db
 
 # UV
-uv.lock
+# uv.lock  # Keep uv.lock in repo for reproducible builds
 

@@ -18,24 +18,24 @@ def test_help():
     assert "AI-friendly Secrets Management CLI" in result.stdout
 
 
-def test_set_command():
+def test_set_command(tmp_path: Path):
     """Test set command."""
     with patch("ai_secrets.storage.keyring") as mock_keyring:
         result = runner.invoke(
             app,
-            ["--service-name", "test", "--base-dir", ".test-secrets", "set", "TEST_KEY", "test_value"],
+            ["--service-name", "test", "--base-dir", str(tmp_path), "set", "TEST_KEY", "test_value"],
         )
         assert result.exit_code == 0
         assert "stored securely" in result.stdout
         mock_keyring.set_password.assert_called_once()
 
 
-def test_set_command_json():
+def test_set_command_json(tmp_path: Path):
     """Test set command with JSON output."""
     with patch("ai_secrets.storage.keyring") as mock_keyring:
         result = runner.invoke(
             app,
-            ["--service-name", "test", "--base-dir", ".test-secrets", "set", "TEST_KEY", "test_value", "-f", "json"],
+            ["--service-name", "test", "--base-dir", str(tmp_path), "set", "TEST_KEY", "test_value", "-f", "json"],
         )
         assert result.exit_code == 0
         output = json.loads(result.stdout)
@@ -43,40 +43,40 @@ def test_set_command_json():
         assert output["name"] == "TEST_KEY"
 
 
-def test_get_command():
+def test_get_command(tmp_path: Path):
     """Test get command."""
     with patch("ai_secrets.storage.keyring") as mock_keyring:
         mock_keyring.get_password.return_value = "test_value"
         
         result = runner.invoke(
             app,
-            ["--service-name", "test", "--base-dir", ".test-secrets", "get", "TEST_KEY"],
+            ["--service-name", "test", "--base-dir", str(tmp_path), "get", "TEST_KEY"],
         )
         assert result.exit_code == 0
         assert "exists" in result.stdout
 
 
-def test_get_command_print():
+def test_get_command_print(tmp_path: Path):
     """Test get command with --print flag."""
     with patch("ai_secrets.storage.keyring") as mock_keyring:
         mock_keyring.get_password.return_value = "test_value"
         
         result = runner.invoke(
             app,
-            ["--service-name", "test", "--base-dir", ".test-secrets", "get", "TEST_KEY", "--print"],
+            ["--service-name", "test", "--base-dir", str(tmp_path), "get", "TEST_KEY", "--print"],
         )
         assert result.exit_code == 0
         assert "TEST_KEY: test_value" in result.stdout
 
 
-def test_get_nonexistent():
+def test_get_nonexistent(tmp_path: Path):
     """Test get command for non-existent secret."""
     with patch("ai_secrets.storage.keyring") as mock_keyring:
         mock_keyring.get_password.return_value = None
         
         result = runner.invoke(
             app,
-            ["--service-name", "test", "--base-dir", ".test-secrets", "get", "NONEXISTENT"],
+            ["--service-name", "test", "--base-dir", str(tmp_path), "get", "NONEXISTENT"],
         )
         assert result.exit_code == 1
         assert "not found" in result.stdout
@@ -108,28 +108,28 @@ def test_list_command_json(tmp_path: Path):
         assert isinstance(output["secrets"], list)
 
 
-def test_delete_command():
+def test_delete_command(tmp_path: Path):
     """Test delete command with confirmation."""
     with patch("ai_secrets.storage.keyring") as mock_keyring:
         mock_keyring.get_password.return_value = "test_value"
         
         result = runner.invoke(
             app,
-            ["--service-name", "test", "--base-dir", ".test-secrets", "delete", "TEST_KEY", "--yes"],
+            ["--service-name", "test", "--base-dir", str(tmp_path), "delete", "TEST_KEY", "--yes"],
         )
         assert result.exit_code == 0
         assert "deleted" in result.stdout
         mock_keyring.delete_password.assert_called_once()
 
 
-def test_delete_nonexistent():
+def test_delete_nonexistent(tmp_path: Path):
     """Test delete command for non-existent secret."""
     with patch("ai_secrets.storage.keyring") as mock_keyring:
         mock_keyring.get_password.return_value = None
         
         result = runner.invoke(
             app,
-            ["--service-name", "test", "--base-dir", ".test-secrets", "delete", "NONEXISTENT", "--yes"],
+            ["--service-name", "test", "--base-dir", str(tmp_path), "delete", "NONEXISTENT", "--yes"],
         )
         assert result.exit_code == 1
         assert "not found" in result.stdout
