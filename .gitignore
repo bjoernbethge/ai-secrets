@@ -44,6 +44,7 @@ htmlcov/
 .secrets/
 .test-secrets/
 .demo/
+examples/__pycache__/
 
 # OS
 .DS_Store

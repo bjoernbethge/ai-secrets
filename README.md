@@ -188,6 +188,29 @@ keyring.delete_password("myapp", "API_KEY")
 > - ✅ JSON export for AI workflows
 > - ✅ CLI convenience
 
+## Examples
+
+See the `examples/` directory for practical use cases:
+
+### 🤖 Pydantic AI Integration
+
+AI agent with secure secret management and tool approval workflow. See [`examples/pydantic_ai_example.py`](examples/pydantic_ai_example.py).
+
+**Install and run:**
+```bash
+# Install with Pydantic AI dependencies
+uv sync --group examples
+
+# Run the example
+uv run python examples/pydantic_ai_example.py
+```
+
+**Features demonstrated:**
+- Secure API key storage for AI agents
+- Human-in-the-loop tool approval for expensive operations
+- Structured outputs with Pydantic models
+- Budget controls and cost thresholds
+
 ## Development
 
 ```bash
@@ -196,6 +219,9 @@ uv sync
 
 # Run tests
 uv run pytest tests/ -v
+
+# Install with examples
+uv sync --group examples
 ```
 
 ## Notes
