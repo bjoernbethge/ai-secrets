@@ -21,12 +21,12 @@ Windows Credential Manager • macOS Keychain • Linux Secret Service
 pip install ai-secrets
 
 # Or with uv
-uv pip install ai-secrets
+uv add ai-secrets
 
 # Development install
 git clone https://github.com/BjornBethge/ai-secrets.git
 cd ai-secrets
-uv pip install -e .
+uv sync
 ```
 
 ## Quick Start
@@ -196,9 +196,6 @@ uv sync
 
 # Run tests
 uv run pytest tests/ -v
-
-# Install in dev mode
-uv pip install -e .
 ```
 
 ## Notes
