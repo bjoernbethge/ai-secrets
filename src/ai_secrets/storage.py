@@ -15,7 +15,7 @@ class SecretsStore:
     with secret names only (not values).
     
     Args:
-        service_name: Namespace for storing secrets in keyring (default: "ai-keys")
+        service_name: Namespace for storing secrets in keyring (default: "ai-secrets")
         base_dir: Directory for metadata file (default: ~/.secrets)
         
     Attributes:

@@ -42,7 +42,7 @@ def output_result(
 def main(
     ctx: typer.Context,
     service_name: str = typer.Option(
-        "ai-keys", "--service-name", help="Service name namespace in keyring"
+        "ai-secrets", "--service-name", help="Service name namespace in keyring"
     ),
     base_dir: Optional[Path] = typer.Option(
         None, "--base-dir", help="Directory for metadata index (defaults to ~/.secrets)"
