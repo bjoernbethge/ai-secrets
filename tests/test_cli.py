@@ -145,7 +145,7 @@ def test_export_bash(tmp_path: Path):
         
         store_dir = tmp_path / ".secrets"
         store_dir.mkdir()
-        (store_dir / "metadata.json").write_text(json.dumps({"secrets": ["KEY1", "KEY2"]}))
+        (store_dir / "metadata_test.json").write_text(json.dumps({"secrets": ["KEY1", "KEY2"]}))
         
         result = runner.invoke(
             app,
@@ -167,7 +167,7 @@ def test_export_json(tmp_path: Path):
         
         store_dir = tmp_path / ".secrets"
         store_dir.mkdir()
-        (store_dir / "metadata.json").write_text(json.dumps({"secrets": ["KEY1", "KEY2"]}))
+        (store_dir / "metadata_test.json").write_text(json.dumps({"secrets": ["KEY1", "KEY2"]}))
         
         result = runner.invoke(
             app,

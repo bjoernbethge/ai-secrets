@@ -31,7 +31,9 @@ class SecretsStore:
             raise ValueError("service_name cannot be empty")
         self.service_name = service_name.strip()
         self.base_dir = base_dir or Path.home() / ".secrets"
-        self.metadata_file = self.base_dir / "metadata.json"
+        # Service-specific metadata file to avoid conflicts
+        safe_service_name = self.service_name.replace("/", "_").replace("\\", "_")
+        self.metadata_file = self.base_dir / f"metadata_{safe_service_name}.json"
 
     def _setup_dirs(self) -> None:
         """Create base directory with secure permissions (0o700)."""

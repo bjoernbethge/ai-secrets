@@ -45,7 +45,7 @@ def test_init_default():
     store = SecretsStore()
     assert store.service_name == "ai-secrets"
     assert store.base_dir == Path.home() / ".secrets"
-    assert store.metadata_file == store.base_dir / "metadata.json"
+    assert store.metadata_file == store.base_dir / "metadata_ai-secrets.json"
 
 
 def test_init_custom(tmp_path: Path):
@@ -54,7 +54,7 @@ def test_init_custom(tmp_path: Path):
     store = SecretsStore(service_name="my-service", base_dir=custom_dir)
     assert store.service_name == "my-service"
     assert store.base_dir == custom_dir
-    assert store.metadata_file == custom_dir / "metadata.json"
+    assert store.metadata_file == custom_dir / "metadata_my-service.json"
 
 
 def test_init_empty_service_name():

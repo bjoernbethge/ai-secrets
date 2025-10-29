@@ -8,6 +8,7 @@ Usage:
 
 from ai_secrets.storage import SecretsStore
 
+
 def migrate():
     """Migrate secrets from ai-keys to ai-secrets."""
     old_store = SecretsStore(service_name="ai-keys")
