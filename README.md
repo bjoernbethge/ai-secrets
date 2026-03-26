@@ -1,5 +1,7 @@
 # ai-secrets
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N71WOHZ3)
+
 [![PyPI version](https://img.shields.io/pypi/v/ai-secrets.svg)](https://pypi.org/project/ai-secrets/)
 [![Python versions](https://img.shields.io/pypi/pyversions/ai-secrets.svg)](https://pypi.org/project/ai-secrets/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -254,4 +256,3 @@ uv sync --group examples
 - Each service has its own metadata file to avoid conflicts
 - `export -f bash` prints warning to stderr
 - Linux/KeePassXC: May prompt for database unlock
-
